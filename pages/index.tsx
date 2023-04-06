@@ -11,15 +11,19 @@ export default function Home() {
   const [firstname, setFirstname] = useState("");
   const [surname, setSurname] = useState("");
 
-  function handleFirstnameChange(event) {
+  function handleFirstnameChange(event: {
+    target: { value: React.SetStateAction<string> };
+  }) {
     setFirstname(event.target.value);
   }
 
-  function handleSurnameChange(event) {
+  function handleSurnameChange(event: {
+    target: { value: React.SetStateAction<string> };
+  }) {
     setSurname(event.target.value);
   }
 
-  function handleAddItem(event) {
+  function handleAddItem(event: { preventDefault: () => void }) {
     //stop the page from reloading
     event.preventDefault();
 
@@ -36,7 +40,7 @@ export default function Home() {
     setSurname("");
   }
 
-  function handleRemoveItem(id) {
+  function handleRemoveItem(id: number) {
     setNames((people) => people.filter((person) => person.id !== id));
   }
 
@@ -62,10 +66,7 @@ export default function Home() {
                       className="peer block w-full border-0 p-0 text-base text-gray-900 placeholder-gray-400 focus:ring-0 outline-none"
                       placeholder="First name"
                     />
-                    <label
-                      html="firstname"
-                      className="block transform text-xs font-bold uppercase text-gray-400 transition-opacity, duration-200 peer-placeholder-shown:h-0 peer-placeholder-shown:-translate-y-full peer-placeholder-shown:opacity-0"
-                    >
+                    <label className="block transform text-xs font-bold uppercase text-gray-400 transition-opacity, duration-200 peer-placeholder-shown:h-0 peer-placeholder-shown:-translate-y-full peer-placeholder-shown:opacity-0">
                       First name
                     </label>
                   </div>
@@ -80,10 +81,7 @@ export default function Home() {
                       className="peer block w-full border-0 p-0 text-base text-gray-900 placeholder-gray-400 focus:ring-0 outline-none"
                       placeholder="Surname"
                     />
-                    <label
-                      html="Surname"
-                      className="block transform text-xs font-bold uppercase text-gray-400 transition-opacity, duration-200 peer-placeholder-shown:h-0 peer-placeholder-shown:-translate-y-full peer-placeholder-shown:opacity-0"
-                    >
+                    <label className="block transform text-xs font-bold uppercase text-gray-400 transition-opacity, duration-200 peer-placeholder-shown:h-0 peer-placeholder-shown:-translate-y-full peer-placeholder-shown:opacity-0">
                       Surname
                     </label>
                   </div>
