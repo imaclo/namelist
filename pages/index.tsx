@@ -46,8 +46,8 @@ export default function Home() {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-5 justify-center min-h-screen from-[#F9F5F3] via-[#F9F5F3] to-[#F9F5F3] bg-gradient-to-br px-2">
-        <div className="w-full max-w-md mx-auto bg-white rounded-3xl shadow-xl overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-5 justify-center min-h-screen from-[#F9F5F3] via-[#F9F5F3] to-[#F9F5F3] bg-gradient-to-br px-2 ">
+        <div className="w-full max-w-md mx-auto bg-white rounded-3xl shadow-xl overflow-hidden  mb-10 mt-4">
           <div className="max-w-md mx-auto">
             <div className="p-4 sm:p-6">
               <p className="font-bold text-gray-700 text-[22px] leading-7 mb-1">
@@ -100,7 +100,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-full max-w-md  mx-auto bg-white rounded-3xl shadow-xl overflow-hidden mb-5">
+        <div className="w-full max-w-md  mx-auto bg-white rounded-3xl shadow-xl overflow-hidden  mb-10 mt-4">
           <div className="max-w-md mx-auto">
             <div className="p-4 sm:p-6">
               <p className="font-bold text-gray-700 text-[22px] leading-7 mb-1">
