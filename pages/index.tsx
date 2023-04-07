@@ -3,7 +3,7 @@ import { GrTrash } from "react-icons/gr";
 
 export default function Home() {
   const [names, setNames] = useState([
-    { id: 1, firstname: "Iron", surname: "Iron" },
+    { id: 1, firstname: "Iron", surname: "Man" },
     { id: 2, firstname: "Spider", surname: "Man" },
     { id: 3, firstname: "Incredible", surname: "Hulk" },
   ]);
@@ -46,7 +46,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex items-center justify-center min-h-screen from-[#F9F5F3] via-[#F9F5F3] to-[#F9F5F3] bg-gradient-to-br px-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-5 justify-center min-h-screen from-[#F9F5F3] via-[#F9F5F3] to-[#F9F5F3] bg-gradient-to-br px-2">
         <div className="w-full max-w-md mx-auto bg-white rounded-3xl shadow-xl overflow-hidden">
           <div className="max-w-md mx-auto">
             <div className="p-4 sm:p-6">
@@ -91,7 +91,7 @@ export default function Home() {
               <a
                 target="_blank"
                 href="foodiesapp://food/1001"
-                className="block mt-10 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform bg-[#FFC933] rounded-[14px] hover:bg-[#FFC933DD] focus:outline-none "
+                className="block mt-5 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform bg-[#FFC933] rounded-[14px] hover:bg-[#FFC933DD] focus:outline-none "
                 onClick={handleAddItem}
               >
                 Add to list
@@ -100,7 +100,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-full max-w-md  mx-auto bg-white rounded-3xl shadow-xl overflow-hidden mt-5 mb-5">
+        <div className="w-full max-w-md  mx-auto bg-white rounded-3xl shadow-xl overflow-hidden mb-5">
           <div className="max-w-md mx-auto">
             <div className="p-4 sm:p-6">
               <p className="font-bold text-gray-700 text-[22px] leading-7 mb-1">
