@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GrTrash } from "react-icons/gr";
 import { GrFormNextLink } from "react-icons/gr";
 
-export default function Home() {
-  const [names, setNames] = useState([
-    { id: 1, firstname: "Iron", surname: "Man" },
-    { id: 2, firstname: "Spider", surname: "Man" },
-    { id: 3, firstname: "Incredible", surname: "Hulk" },
-  ]);
+export default function Postgres() {
+  const [names, setNames] = useState(null);
 
   const [firstname, setFirstname] = useState("");
   const [surname, setSurname] = useState("");
+
+  useEffect(() => {
+    const data = { func: "all" };
+
+    fetch(
+      "https://exmf2c3qlrry4bwulhkhji6txa0jizyw.lambda-url.eu-west-2.on.aws/",
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setNames(data);
+      });
+  }, [names]);
 
   function handleFirstnameChange(event: {
     target: { value: React.SetStateAction<string> };
@@ -24,25 +36,39 @@ export default function Home() {
     setSurname(event.target.value);
   }
 
-  function handleAddItem(event: { preventDefault: () => void }) {
+  async function handleAddItem(event: { preventDefault: () => void }) {
     //stop the page from reloading
     event.preventDefault();
 
-    //get the next available id
-    const nextId = Math.max(...names.map((person) => person.id)) + 1;
+    const json = { func: "insert", firstname: firstname, surname: surname };
 
-    //create the next item for the array
-    const newName = { id: nextId, firstname: firstname, surname: surname };
+    const response = await fetch(
+      "https://exmf2c3qlrry4bwulhkhji6txa0jizyw.lambda-url.eu-west-2.on.aws/",
+      {
+        method: "POST",
+        body: JSON.stringify(json),
+      }
+    );
+    const resp = await response.json();
 
-    //add this new item to tht e
-    setNames([...names, newName]);
-
+    setNames(null);
     setFirstname("");
     setSurname("");
   }
 
-  function handleRemoveItem(id: number) {
-    setNames((people) => people.filter((person) => person.id !== id));
+  async function handleRemoveItem(id: number) {
+    const json = { func: "delete", id: id };
+
+    const response = await fetch(
+      "https://exmf2c3qlrry4bwulhkhji6txa0jizyw.lambda-url.eu-west-2.on.aws/",
+      {
+        method: "POST",
+        body: JSON.stringify(json),
+      }
+    );
+    const resp = await response.json();
+
+    setNames(null);
   }
 
   return (
@@ -52,7 +78,7 @@ export default function Home() {
           <div className="max-w-md mx-auto">
             <div className="p-4 sm:p-6">
               <p className="font-bold text-gray-700 text-[22px] leading-7 mb-1">
-                Add a person to the list (local data)
+                Add a person to the list (Postgres data)
               </p>
 
               <div className="mt-5">
@@ -100,12 +126,12 @@ export default function Home() {
 
               <a
                 target="_self"
-                href="postgres"
+                href="/"
                 className="block mt-10 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform bg-[#d4d4d4] rounded-[14px] hover:bg-[#343434dd] focus:outline-none "
               >
                 <div className="flex justify-end">
                   <div className="flex items-center space-x-2 cursor-pointer">
-                    <span>Postgres version</span>
+                    <span>Static version</span>
                     <GrFormNextLink></GrFormNextLink>
                   </div>
                 </div>
@@ -121,29 +147,31 @@ export default function Home() {
                 People on the list
               </p>
 
-              <div className="grid grid-cols-1 gap-4 mt-5">
-                {names.map((person) => (
-                  <div
-                    key={person.id}
-                    className="grid grid-cols-2 gap-4 p-4 rounded-md border border-gray-300"
-                  >
-                    <div>
-                      <h2 className="text-lg font-bold">
-                        {person.firstname} {person.surname}
-                      </h2>
-                    </div>
-                    <div className="flex justify-end">
-                      <div
-                        className="flex items-center space-x-2 cursor-pointer"
-                        onClick={() => handleRemoveItem(person.id)}
-                      >
-                        <GrTrash></GrTrash>
-                        <span>Delete</span>
+              {names && (
+                <div className="grid grid-cols-1 gap-4 mt-5">
+                  {names.map((person) => (
+                    <div
+                      key={person.id}
+                      className="grid grid-cols-2 gap-4 p-4 rounded-md border border-gray-300"
+                    >
+                      <div>
+                        <h2 className="text-lg font-bold">
+                          {person.firstname} {person.surname}
+                        </h2>
+                      </div>
+                      <div className="flex justify-end">
+                        <div
+                          className="flex items-center space-x-2 cursor-pointer"
+                          onClick={() => handleRemoveItem(person.id)}
+                        >
+                          <GrTrash></GrTrash>
+                          <span>Delete</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
