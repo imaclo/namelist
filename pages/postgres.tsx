@@ -3,7 +3,7 @@ import { GrTrash } from "react-icons/gr";
 import { GrFormNextLink } from "react-icons/gr";
 
 export default function Postgres() {
-  const [names, setNames] = useState(null);
+  const [names, setNames] = useState<any[]>([]);
 
   const [firstname, setFirstname] = useState("");
   const [surname, setSurname] = useState("");
@@ -51,7 +51,7 @@ export default function Postgres() {
     );
     const resp = await response.json();
 
-    setNames(null);
+    setNames([]);
     setFirstname("");
     setSurname("");
   }
@@ -68,7 +68,7 @@ export default function Postgres() {
     );
     const resp = await response.json();
 
-    setNames(null);
+    setNames([]);
   }
 
   return (
